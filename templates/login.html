@@ -1,0 +1,19 @@
+{% include "header.html" %}
+<div style="width: 500px; margin: 50px auto">
+{% if not user.is_authenticated %}
+<form action="/login" method="post">
+  {% csrf_token %}
+  {% for message in messages %}
+    <span class="{{ message.tags }}" style="color:red">
+    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+    </span>
+  {% endfor %}
+  <label>Нэвтрэх нэр:</label>
+  <input type="text" name="username" placeholder="Нэвтрэх нэр">
+  <label>Нууц үг:</label>
+  <input type="password" name="password" placeholder="Нууц үг">
+  <input type="submit" value="Нэвтрэх">
+  </form>
+{% endif %}
+</div>
+{% include "footer.html" %}
